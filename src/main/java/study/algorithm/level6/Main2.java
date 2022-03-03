@@ -3,6 +3,9 @@ package study.algorithm.level6;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class Main2 {
     int d(int n) {
@@ -18,25 +21,24 @@ public class Main2 {
         return res;
     }
 
-    boolean isSelfNumber(int num) {
-        int cnt = 0;
-        for (int i = 1; i < num; i++) {
-            if (d(i) == num) {
-                cnt ++;
-            }
-        }
-        return cnt == 0;
-    }
-
-    // 만넘을떄까지 d(n) 계속돌림 -> 만까지 배열중에 나온숫자 다뻄 ???
     public static void main(String[] args) {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         Main2 main = new Main2();
 
+        List<Integer> allNumbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         try {
             for (int i = 1; i <= 10000; i++) {
-                if (main.isSelfNumber(i)) {
-                    bw.write(String.valueOf(i));
+                allNumbers.add(i);
+                if (main.d(i) <= 10000) {
+                    numbers.add(main.d(i));
+                }
+            }
+            numbers = new ArrayList<>(new HashSet<>(numbers));
+
+            for (int number : allNumbers) {
+                if (!numbers.contains(number)) {
+                    bw.write(String.valueOf(number));
                     bw.newLine();
                 }
             }
