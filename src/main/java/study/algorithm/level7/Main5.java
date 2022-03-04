@@ -11,33 +11,30 @@ public class Main5 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         try {
-            String[] alphabets = br.readLine().split("");
+            String[] alphabets = br.readLine().toLowerCase().split("");
             br.close();
 
             Set<String> set = new HashSet<>(Arrays.asList(alphabets));
 
             int mostUsedCount = 0;
             String mostUsedAlphabet = null;
-            boolean isMany = false;
             for (String _alphabet : set) {
-                if (mostUsedAlphabet != null && mostUsedAlphabet.equalsIgnoreCase(_alphabet)) continue;
+                if (mostUsedAlphabet != null && mostUsedAlphabet.equals(_alphabet)) continue;
                 int usedCount = 0;
                 for (String alphabet : alphabets) {
-                    if (_alphabet.equalsIgnoreCase(alphabet)) {
+                    if (_alphabet.equals(alphabet)) {
                         usedCount++;
                     }
                 }
                 if (usedCount == mostUsedCount) {
-                    isMany = true;
-                    break;
+                    mostUsedAlphabet = "?";
                 } else if (usedCount > mostUsedCount) {
                     mostUsedCount = usedCount;
                     mostUsedAlphabet = _alphabet;
                 }
             }
 
-            String result = isMany ? "?" : mostUsedAlphabet.toUpperCase();
-            bw.write(result);
+            bw.write(mostUsedAlphabet.toUpperCase());
             bw.flush();
             bw.close();
         } catch (IOException e) {
