@@ -7,22 +7,14 @@ public class Main3 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         try {
-            String[] S = br.readLine().split("");
+            String word = br.readLine();
             br.close();
 
             char c = 97;
             while (c <= 122) {
-                int index = -1;
-                for (int i = 0; i < S.length; i++) {
-                    if (S[i].charAt(0) == c) {
-                        index = i;
-                        break;
-                    }
-                }
-                bw.write(index + " ");
+                bw.write(word.indexOf(c) + " ");
                 c++;
             }
-            bw.flush();
             bw.close();
         } catch (IOException e) {
             e.printStackTrace();
